@@ -35,17 +35,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     }
         }
 
-        // if($result) {
-        //     echo "works";
-        //     echo "<pre>";
-        // }
-
-        // var_dump($result);
-        // exit;
-         //     echo "/<pre>";
-
-
-
 }
 ?>
 
@@ -77,23 +66,23 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <nav>
         <ul>
             <li>
-                <a href="index.html">Home</a>
+                <a href="index.php">Home</a>
             </li>
     
             <!-- When the user is logged in -->
             <li>
-                <a href="admin.html">Admin</a>
+                <a href="admin.php">Admin</a>
             </li>
             <li>
-                <a href="logout.html">Logout</a>
+                <a href="logout.php">Logout</a>
             </li>
     
             <!-- When the user is not logged in -->
             <li>
-                <a href="register.html">Register</a>
+                <a href="register.php">Register</a>
             </li>
             <li>
-                <a href="login.html">Login</a>
+                <a href="login.php">Login</a>
             </li>
         </ul>
     </nav>
@@ -140,3 +129,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 </body>
 </html>
 
+
+//best practice - to make app work faster
+<?php 
+mysqli_close($conn);
+?>
