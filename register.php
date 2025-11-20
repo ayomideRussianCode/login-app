@@ -9,17 +9,41 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $password = mysqli_real_escape_string($conn, $_POST['password']);
     $confirm_password = mysqli_real_escape_string($conn, $_POST['confirm_password']);
 
+    //check if password and confirm  password match
     if($password !== $confirm_password){
         $error = "Passwords do not match";
     } else{
-        $sql = "INSERT INTO users (username, password, email) VALUES ('$username', '$password', '$email')";
 
-       if ( mysqli_query($conn, $sql)) {
-        echo "Data inserted";
+        // check if username already exists
+        $sql = "SELECT * FROM users WHERE username = '$username' LIMIT 1";
+        $result = mysqli_query($conn, $sql  );
+
+        if(mysqli_num_rows($result) == 1){
+            $error = "Username already exists, Please choose another ";
+        } else{
+
+            //hash password  for security
+            $passwordHash = password_hash($password, PASSWORD_DEFAULT);
+
+            $sql = "INSERT INTO users (username, password, email) VALUES ('$username', '$passwordHash', '$email')";
+
+    if ( mysqli_query($conn, $sql)) {
+         echo "Data Inserted";
        }else {
-        echo "Something happened , no data insereted, error:" .mysqli_connect_error($conn);
+         $error =  "Something happened , no data inserted, error:" .mysqli_connect_error($conn);
        }
     }
+        }
+
+        // if($result) {
+        //     echo "works";
+        //     echo "<pre>";
+        // }
+
+        // var_dump($result);
+        // exit;
+         //     echo "/<pre>";
+
 
 
 }
@@ -36,6 +60,18 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <title>Registration</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
+
+
+<h2>Register</h2>
+
+<?php if ($error): ?>
+    
+    <p style="color: red;">
+        <?php echo $error; ?>
+    </p>
+    <?php endif; ?>
+
+
 
 <body class="register">
     <nav>
@@ -104,4 +140,3 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 </body>
 </html>
 
-<!-- Include Footer -->
