@@ -12,6 +12,9 @@ include 'db.php';
 <body>
     <h2>Welcome to the Homepage</h2>
 
+     <p>
+        <a href="register.php">Register</a>
+    </p>
     <p>
         <a href="login.php">Login</a>
     </p>
