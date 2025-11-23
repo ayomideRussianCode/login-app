@@ -1,5 +1,4 @@
 <?php
-include 'db.php';
 
 $error = '';
 
