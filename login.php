@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (password_verify($password, $user['password'])) {
 
             $_SESSION['logged_in'] = true;
-            $_SESSION['username'] = $user['username'];
+            $_SESSION['username'] = $username;
             header("Location: admin.php");
             exit;
         } else {
@@ -55,11 +55,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <?php endif; ?>
 
 
-            <label for="username">Username:</label><br>
-            <input type="text" name="username" required><br><br>
+            <label for="username">Username:</label>
+            <input type="text" name="username" required>
 
-            <label for="password">Password:</label><br>
-            <input type="password" name="password" required><br><br>
+            <label for="password">Password:</label>
+            <input type="password" name="password" required>
 
             <input type="submit" value="Login">
         </form>
