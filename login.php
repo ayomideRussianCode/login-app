@@ -1,10 +1,9 @@
 <?php
 include 'partials/header.php';
-include  'partials/navigation.php';
+include 'partials/navigation.php';
 
-if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
-    header("Location: admin.php");
-    exit;
+if (is_user_logged_in()) {
+    redirect('admin.php');
 }
 
 $error = '';
@@ -24,8 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             $_SESSION['logged_in'] = true;
             $_SESSION['username'] = $username;
-            header("Location: admin.php");
-            exit;
+            redirect('admin.php');
         } else {
             $error = "Invalid password";
         }
