@@ -1,5 +1,6 @@
 <?php
-include 'db.php';
+include 'partials/header.php';
+include 'partials/navigation.php';
 
 $error = '';
 
@@ -13,12 +14,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($password !== $confirm_password) {
         $error = "Passwords do not match";
     } else {
-
         // check if username already exists
-        $sql = "SELECT * FROM users WHERE username = '$username' LIMIT 1";
-        $result = mysqli_query($conn, $sql);
 
-        if (mysqli_num_rows($result) == 1) {
+        if (userExists($conn, $username)) {
             $error = "Username already exists, Please choose another ";
         } else {
 
@@ -38,14 +36,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 }
-?>
-
-
-
-
-<?php
-include 'partials/header.php';
-include  'partials/navigation.php';
 ?>
 
 

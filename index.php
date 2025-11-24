@@ -6,10 +6,10 @@ include  'partials/navigation.php';
         <div class="hero">
                 <div class="hero-content">
                         <h2>Welcome to our PHP login APP</h2>
-                        <p>Security login and manage your account with us</p>
+                        <p>Securely login and manage your account with us</p>
                         <div class="hero-buttons">
-                                <a href="login.php" Login>Login</a>
-                                <a href="register.php" Login>Register</a>
+                                <a class="btn" href="login.php" Login>Login</a>
+                                <a class="btn" href="register.php" Login>Register</a>
                         </div>
                 </div>
         </div>
