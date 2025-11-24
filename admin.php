@@ -10,7 +10,19 @@ if (!is_user_logged_in()) {
 
 $result = mysqli_query($conn, "SELECT id, username, email, reg_date FROM users");
 
-var_dump($result);
+if ($_SERVER['REQUEST_METHOD'] === "POST"){
+        if(isset($_POST['edit_user'])){
+                $user_id = mysqli_real_escape_string($conn, $_POST['user_id']);
+                $new_email = mysqli_real_escape_string($conn, $_POST['email']);
+
+                $sql = "UPDATE users SET email = '$new_email' WHERE id = $user_id";
+                mysqli_query($conn, $sql);
+                redirect('admin.php');
+
+        }
+}
+
+
 ?>
 
 
@@ -61,12 +73,12 @@ var_dump($result);
                                         <td><?php echo full_month_date($user['reg_date']); ?></td>
                                         <td>
                                                 <form method="POST" style="display:inline-block;">
-                                                        <input type="hidden" name="user_id" value="1">
-                                                        <input type="email" name="email" value="john@example.com" required>
+                                                        <input type="hidden" name="user_id" value="<?php echo $user['id']; ?>">
+                                                        <input type="email" name="email" value="<?php echo $user['email']; ?>" required>
                                                         <button class="edit" type="submit" name="edit_user">Edit</button>
                                                 </form>
                                                 <form method="POST" style="display:inline-block;" onsubmit="return confirm('Are you sure you want to delete this user?');">
-                                                        <input type="hidden" name="user_id" value="1">
+                                                        <input type="hidden" name="user_id" value="<?php echo $user['id']; ?>">
                                                         <button class="delete" type="submit" name="delete_user">Delete</button>
                                                 </form>
                                         </td>
