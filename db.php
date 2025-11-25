@@ -8,8 +8,8 @@ if ($conn){
     echo "Not Connected" .  mysqli_connect_error($conn);
 }
 
-function check_query ($conn, $result){
-    glob($conn);
+function check_query ($result){
+    global $conn;
     if (!$result ){
         return "Error". mysqli_error($conn);
     }

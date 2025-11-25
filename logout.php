@@ -5,5 +5,5 @@ $_SESSION = [];
 
 session_destroy();
 
-redirect("login.php");
+redirect('login.php');
 ?>
