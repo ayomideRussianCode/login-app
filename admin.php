@@ -18,14 +18,23 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
                 $sql = "UPDATE users SET email = '$new_email', username = '$new_username' WHERE id = $user_id";
                 $result = mysqli_query($conn, $sql);
-                if (check_query($result)) {
+                $query_status = check_query($result);
+
+                if ($query_status === true) {
+
+                        $_SESSION['message'] = "User updated successfully to {$new_username}";
+                        $_SESSION['msg_type'] = "success";
                         redirect('admin.php');
                 }
         } elseif (isset($_POST['delete_user'])) {
                 $user_id = mysqli_real_escape_string($conn, $_POST['user_id']);
                 $sql = "DELETE FROM users WHERE id = $user_id";
                 $result = mysqli_query($conn, $sql);
-                if (check_query($result)) {
+                $query_status = check_query($result);
+
+                if ($query_status === true) {
+                        $_SESSION['message'] = "User deleted successfully record with id: {$user_id}";
+                        $_SESSION['msg_type'] = "success";
                         redirect('admin.php');
                 }
         }
@@ -36,10 +45,18 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
 
 
-
 <h1>Manage Users</h1>
 
 <div class="container">
+        <?php if (isset($_SESSION['message'])): ?>
+                <div class="notification  <?php echo $_SESSION['msg_type'] ?>">
+                        <?php
+                        echo $_SESSION['message'];
+                        unset($_SESSION['message']);
+                        unset($_SESSION['msg_type']);
+                        ?>
+                </div>
+        <?php endif; ?>
         <table class="user-table">
                 <thead>
                         <tr>
