@@ -20,15 +20,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $error = "Username already exists, Please choose another ";
         } else {
 
-            //hash password  for security
-            $passwordHash = password_hash($password, PASSWORD_DEFAULT);
+            // hash password  for security
 
-            $sql = "INSERT INTO users (username, password, email) VALUES ('$username', '$passwordHash', '$email')";
-
-            if (mysqli_query($conn, $sql)) {
+          
+            if (check_query(create_user($conn, $username, $email, $password))) {
                 $_SESSION['logged_in'] = true;
                 $_SESSION['username'] = $username;
-                redirect("login.php");
+                redirect("admin.php");
                 exit;
             } else {
                 $error =  "Something happened , no data inserted, error:" . mysqli_connect_error($conn);

@@ -20,13 +20,7 @@ function getPageClass()
     return  basename($_SERVER['PHP_SELF'], ".php");
 }
 
-function userExists ($conn, $username) {
 
-    $sql = "SELECT * FROM users WHERE username = '$username' LIMIT 1";
-    $result = mysqli_query($conn, $sql);
-
-    return mysqli_num_rows($result) > 0;
-}
 
 function full_month_date($date){
     return  $date = date("F j", strtotime($date));
