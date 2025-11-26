@@ -1,9 +1,12 @@
-<?php 
+<?php
+include'partials/functions.php'; 
+
 session_start();
 
 $_SESSION = [];
 
 session_destroy();
 
-redirect('login.php');
+redirect("login.php");
+
 ?>
